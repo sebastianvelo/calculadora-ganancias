@@ -1,0 +1,1 @@
+export const formatNumber = (x: number) => (+x.toFixed(2)).toLocaleString("es-AR");
