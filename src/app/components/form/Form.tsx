@@ -1,5 +1,6 @@
 import UserInputTax from "lib/config/UserInputTax";
 import { FunctionComponent } from "react";
+import Title from "../shared/title/Title";
 import Input from "./input/Input";
 
 interface FormProps {
@@ -19,10 +20,11 @@ interface FormProps {
 }
 
 const Form: FunctionComponent<FormProps> = (props: FormProps) => (
-    <form className="w-full bg-blue-100 p-2 flex flex-col space-y-2">
-        <div>
-            <Input symb="$" type="number" label="Salario bruto" onChange={(e) => props.setters.setSalary(+e.target.value)} min={0} />
+    <form className="w-full flex flex-col space-y-2 border-r-2 border-black border-b-2 md:border-b-0">
+        <Title>Tus datos</Title>
+        <div className="px-2 py-4 flex flex-col items-center space-y-2">
             <div>
+                <Input symb="$" type="number" label="Salario bruto" onChange={(e) => props.setters.setSalary(+e.target.value)} min={0} />
                 <h1 className="text-xl w-full bg-secondary-light text-white p-2 rounded-tr-md rounded-tl-md font-black">Deducciones</h1>
                 <div className="border-2 border-secondary-light rounded-br-md rounded-bl-md">
                     <div className="flex justify-evenly items-center">
@@ -32,7 +34,7 @@ const Form: FunctionComponent<FormProps> = (props: FormProps) => (
                     </div>
                     <div className="flex flex-col sm:flex-row justify-evenly items-center">
                         <Input type="number" label="Cantidad de hijos" onChange={(e) => props.setters.setChildren(+e.target.value)} min={0} />
-                        <Input type="range" label={`Deduzco un ${props.userInput.childrenDeduction}%`} onChange={(e) => props.setters.setChildrenDeduction(+e.target.value)} min={0} max={100} step={50} />
+                        <Input type="range" label={`Deduzco un ${props.userInput.childrenDeduction ?? 0}%`} onChange={(e) => props.setters.setChildrenDeduction(+e.target.value)} min={0} max={100} step={50} />
                     </div>
                     <div className="flex flex-col md:flex-row">
                         <Input symb="$" type="number" label="Credito hipotecario" onChange={(e) => props.setters.setMortgageCredit(+e.target.value)} min={0} />
@@ -41,8 +43,8 @@ const Form: FunctionComponent<FormProps> = (props: FormProps) => (
                     </div>
                 </div>
             </div>
+            <button className="bg-secondary-light hover:bg-secondary text-white transition-all duration-500 px-4 py-1 rounded-md w-full" onClick={props.calculate}>Calcular</button>
         </div>
-        <button className="bg-secondary-light hover:bg-secondary text-white transition-all duration-500 px-4 py-1 rounded-md" onClick={props.calculate}>Calcular</button>
     </form>
 );
 

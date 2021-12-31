@@ -16,7 +16,7 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => (
         <label className="text-xs md:text-lg font-bold">{props.label}</label>
         <div className="w-full flex">
             {props.symb && <div className="border border-black bg-secondary-light text-white w-8 flex items-center justify-center">{props.symb}</div>}
-            <input className="border border-black p-2 w-full" type={props.type} onChange={props.onChange} min={props.min} max={props.max} step={props.step ?? 1} disabled={props.disabled} />
+            <input defaultValue={0} className="border border-black p-2 w-full" type={props.type} onChange={props.onChange} min={props.min} max={props.max} step={props.step ?? 1} disabled={props.disabled} />
         </div>
     </div>
 );

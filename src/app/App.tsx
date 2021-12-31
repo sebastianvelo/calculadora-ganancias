@@ -30,7 +30,7 @@ const App: FunctionComponent = () => {
 
     return (
         <div className="flex flex-col lg:h-screen w-full">
-            <main className="flex lg:flex-row flex-col bg-black h-full w-full">
+            <main className="flex lg:flex-row flex-col h-full w-full bg-blue-50">
                 <Form userInput={getUserInput()} setters={setters} calculate={calculate} />
                 <Summary summary={summary} />
             </main>
