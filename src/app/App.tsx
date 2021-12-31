@@ -1,10 +1,11 @@
-import UserInputTax from "lib/config/UserInputTax";
+import TaxSummary from "lib/entities/TaxSummary";
+import TaxUserInput from "lib/entities/TaxUserInput";
 import Tax from "lib/Tax";
-import TaxSummary from "lib/TaxSummary";
+import getTaxSummaryModel from "lib/view/getTaxSummaryModel";
 import { FunctionComponent, useState } from "react";
 import Form from "./components/form/Form";
 import Summary from "./components/summary/Summary";
-import configTax from "./tax/configTax";
+import taxConfig from "./tax/taxConfig";
 
 const App: FunctionComponent = () => {
     const [salary, setSalary] = useState<number>(0);
@@ -22,17 +23,17 @@ const App: FunctionComponent = () => {
         setSalary, setSpouse, setRetired, setPatagonic, setChildren, setChildrenDeduction, setRental, setMortgageCredit, setDomesticEmployee
     }
 
-    const getUserInput = (): UserInputTax => ({
+    const getUserInput = (): TaxUserInput => ({
         salary, spouse, retired, patagonic, children, childrenDeduction, rental, mortgageCredit, domesticEmployee
     })
 
-    const calculate = () => setSummary(Tax.getSummary(getUserInput(), configTax))
+    const calculate = () => setSummary(Tax.getSummary(getUserInput(), taxConfig))
 
     return (
         <div className="flex flex-col lg:h-screen w-full">
             <main className="flex lg:flex-row flex-col h-full w-full bg-blue-50">
                 <Form userInput={getUserInput()} setters={setters} calculate={calculate} />
-                <Summary summary={summary} />
+                <Summary summary={getTaxSummaryModel(summary)} />
             </main>
             <footer className="bg-secondary-light h-8 w-full px-2 flex items-center justify-end font-bold text-sm">
                 <a target="_blank" href="https://www.linkedin.com/in/sebastian-velo/">Hecho con ♥ por Sebastian Velo</a>

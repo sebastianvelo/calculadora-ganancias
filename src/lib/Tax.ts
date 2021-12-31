@@ -1,32 +1,22 @@
-import type UserInputTax from "./config/UserInputTax";
-import type Deductions from "./deduction/entities/Deductions";
-import GetDeductions from "./deduction/GetDeduction";
-import type SalaryRange from "./config/SalaryRange";
-import type ConfigTax from "./config/ConfigTax";
-import Formula from "./shared/Formula";
-import TaxSummary from "./TaxSummary";
-import { formatNumber } from "./shared/Format";
+import TaxCalculator from "./calculator/TaxCalculator";
+import type TaxConfig from "./config/TaxConfig";
+import SalaryRange from "./config/SalaryRange";
+import TaxSummary from "./entities/TaxSummary";
+import type TaxUserInput from "./entities/TaxUserInput";
+import SalaryFormula from "./salary/SalaryFormula";
 
-class Tax {
-    static incomeTax = (data: UserInputTax, deductions: Deductions) =>
-        Formula.salaryGrossAnual(data.salary) - GetDeductions.total(data, deductions);
+namespace Tax {
 
-    static incomeTaxMonth = (data: UserInputTax, deductions: Deductions) =>
-        Tax.incomeTax(data, deductions) / 12;
+    export const getIncomeTaxSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary | null => {
+        const tax = TaxCalculator.getIncomeTaxAnnual(userInput, config.deductions);
 
-    static isInRange = (tax: number, ranges: SalaryRange[], i: number) =>
-        tax >= ranges[i].floor && tax < ranges[i + 1].floor;
-
-    static getIncomeTaxSummary = (userInput: UserInputTax, config: ConfigTax): TaxSummary | null => {
-        const tax = Tax.incomeTax(userInput, config.deductions);
-        console.log(tax)
         for (let i = 0; i < config.salaryRanges.length - 1; i += 1) {
-            if (Tax.isInRange(tax, config.salaryRanges, i)) {
+            if (SalaryRange.isInRange(tax, config.salaryRanges, i)) {
                 const range = config.salaryRanges[i];
                 return {
                     salary: {
-                        net: formatNumber(Formula.salaryNetMonth(userInput.salary, range.getAnualTax(tax))),
-                        gross: formatNumber(userInput.salary)
+                        net: SalaryFormula.getSalaryNetMonth(userInput.salary, range.getAnnualTax(tax)),
+                        gross: userInput.salary
                     },
                     tax: range.getJSON(tax)
                 };
@@ -35,17 +25,17 @@ class Tax {
         return null;
     };
 
-    static getSummary = (userInput: UserInputTax, config: ConfigTax): TaxSummary | null => {
+    export const getSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary | null => {
         if (userInput.salary > config.floor) return Tax.getIncomeTaxSummary(userInput, config);
         return {
             salary: {
-                net: formatNumber(Formula.salaryNetMonth(userInput.salary, 0)),
-                gross: formatNumber(userInput.salary)
+                net: SalaryFormula.getSalaryNetMonth(userInput.salary, 0),
+                gross: userInput.salary
             },
             tax: {
-                anual: formatNumber(0),
-                month: formatNumber(0),
-                floor: formatNumber(0),
+                annual: 0,
+                month: 0,
+                floor: 0,
                 aliquote: 0,
             }
         };

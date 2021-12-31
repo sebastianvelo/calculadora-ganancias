@@ -1,5 +1,3 @@
-import { formatNumber } from "lib/shared/Format";
-
 class SalaryRange {
 
   fixed: number;
@@ -14,23 +12,26 @@ class SalaryRange {
     this.aliquote = aliquote;
   }
 
+  static isInRange = (tax: number, ranges: SalaryRange[], i: number) =>
+    tax >= ranges[i].floor && tax < ranges[i + 1].floor;
+
   getSurplus(tax: number) {
     return tax - this.floor;
   }
 
-  getAnualTax(tax: number) {
+  getAnnualTax(tax: number) {
     return this.fixed + this.getSurplus(tax) * this.aliquote;
   }
 
   getMonthlyTax(tax: number) {
-    return this.getAnualTax(tax) / 12;
+    return this.getAnnualTax(tax) / 12;
   }
 
   getJSON(tax: number) {
     return {
-      anual: formatNumber(this.getAnualTax(tax)),
-      month: formatNumber(this.getMonthlyTax(tax)),
-      floor: formatNumber(this.floor),
+      annual: this.getAnnualTax(tax),
+      month: this.getMonthlyTax(tax),
+      floor: this.floor,
       aliquote: this.aliquote * 100,
     };
   }

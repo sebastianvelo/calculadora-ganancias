@@ -1,4 +1,4 @@
-import UserInputTax from "lib/config/UserInputTax";
+import TaxUserInput from "lib/entities/TaxUserInput";
 import { FunctionComponent } from "react";
 import Title from "../shared/title/Title";
 import Input from "./input/Input";
@@ -15,7 +15,7 @@ interface FormProps {
         setRental: (e: any) => void,
         setDomesticEmployee: (e: any) => void,
     },
-    userInput: UserInputTax;
+    userInput: TaxUserInput;
     calculate: () => void;
 }
 
