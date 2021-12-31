@@ -10,10 +10,10 @@ const SummaryRow = (props: { children: React.ReactElement[] }) => (<div classNam
 </div>)
 
 const Summary: FunctionComponent<SummaryProps> = (props: SummaryProps) => (
-    <div className="bg-gray-700 w-full text-white px-2 py-4 space-y-2">
-        <h2 className="font-bold text-3xl text-center">Resumen</h2>
+    <div className="bg-blue-100 w-full h-full px-2 py-4 space-y-2 justify-center">
+        <h2 className="font-bold text-3xl">Resumen</h2>
         {props.summary &&
-            <div className="text-lg bg-gray-900 px-2 pb-2 space-y-2 divide-y divide-y-white rounded-md">
+            <div className="text-lg bg-gray-900 px-2 pb-2 space-y-2 divide-y divide-y-white rounded-md text-white">
                 <SummaryRow>
                     <h3 className="font-bold">Sueldo bruto</h3>
                     <p className="text-green-200">${props.summary.salary.gross}</p>

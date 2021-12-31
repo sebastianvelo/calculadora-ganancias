@@ -29,9 +29,14 @@ const App: FunctionComponent = () => {
     const calculate = () => setSummary(Tax.getSummary(getUserInput(), configTax))
 
     return (
-        <div className="flex lg:flex-row flex-col bg-black lg:h-screen">
-            <Form userInput={getUserInput()} setters={setters} calculate={calculate} />
-            <Summary summary={summary} />
+        <div className="flex flex-col lg:h-screen w-full">
+            <main className="flex lg:flex-row flex-col bg-black h-full w-full">
+                <Form userInput={getUserInput()} setters={setters} calculate={calculate} />
+                <Summary summary={summary} />
+            </main>
+            <footer className="bg-secondary-light h-8 w-full px-2 flex items-center justify-end font-bold text-sm">
+                <a target="_blank" href="https://www.linkedin.com/in/sebastian-velo/">Hecho con ♥ por Sebastian Velo</a>
+            </footer>
         </div>
     )
 };

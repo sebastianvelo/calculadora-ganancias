@@ -19,7 +19,7 @@ interface FormProps {
 }
 
 const Form: FunctionComponent<FormProps> = (props: FormProps) => (
-    <form className="w-full border border-black bg-blue-100 p-2 flex flex-col space-y-2">
+    <form className="w-full bg-blue-100 p-2 flex flex-col space-y-2">
         <div>
             <Input symb="$" type="number" label="Salario bruto" onChange={(e) => props.setters.setSalary(+e.target.value)} min={0} />
             <div>
@@ -37,7 +37,7 @@ const Form: FunctionComponent<FormProps> = (props: FormProps) => (
                     <div className="flex flex-col md:flex-row">
                         <Input symb="$" type="number" label="Credito hipotecario" onChange={(e) => props.setters.setMortgageCredit(+e.target.value)} min={0} />
                         <Input symb="$" type="number" label="Alquiler" onChange={(e) => props.setters.setRental(+e.target.value)} min={0} />
-                        <Input symb="$" type="number" label="Empleadx domesticx" onChange={(e) => props.setters.setDomesticEmployee(+e.target.value)} min={0} />
+                        <Input symb="$" type="number" label="Servicios domésticos" onChange={(e) => props.setters.setDomesticEmployee(+e.target.value)} min={0} />
                     </div>
                 </div>
             </div>
