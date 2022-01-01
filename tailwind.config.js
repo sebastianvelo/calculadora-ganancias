@@ -26,9 +26,9 @@ module.exports = {
           dark: colors.yellow[600],
         },
         secondary: {
-          light: "#2EAADC",
-          DEFAULT: "#186A8B",
-          dark: "#030D11",
+          light: colors.green[300],
+          DEFAULT: colors.green[500],
+          dark: colors.green[600],
         },
         success: {
           light: colors.green[300],

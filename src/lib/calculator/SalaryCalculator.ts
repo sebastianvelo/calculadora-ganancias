@@ -1,3 +1,7 @@
+import TaxConfig from "lib/config/TaxConfig";
+import TaxUserInput from "lib/entities/TaxUserInput";
+import DeductionCalculator from "./DeductionCalculator";
+
 namespace SalaryCalculator {
 
     export namespace Formula {
@@ -12,6 +16,9 @@ namespace SalaryCalculator {
 
     export const getMonthlySalaryNet = (salaryGross: number, monthlyTax: number) =>
         Formula.getMonthlySalaryNet(salaryGross) - monthlyTax;
+
+    export const getAnnualDeductedSalary = (data: TaxUserInput, config: TaxConfig) =>
+        SalaryCalculator.getAnnualSalaryGross(data.salary) - DeductionCalculator.getTotal(data, config);
 
 }
 

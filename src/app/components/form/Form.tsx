@@ -5,28 +5,28 @@ import Input from "./input/Input";
 
 interface FormProps {
     setters: {
-        setSalary: (e: any) => void,
-        setSpouse: (e: any) => void,
-        setRetired: (e: any) => void,
-        setPatagonic: (e: any) => void,
-        setChildren: (e: any) => void,
+        setSalary: (e: number) => void,
+        setSpouse: (e: boolean) => void,
+        setRetired: (e: boolean) => void,
+        setPatagonic: (e: boolean) => void,
+        setChildren: (e: number) => void,
         setChildrenDeduction: (e: any) => void,
-        setMortgageCredit: (e: any) => void,
-        setRental: (e: any) => void,
-        setDomesticEmployee: (e: any) => void,
+        setMortgageCredit: (e: number) => void,
+        setRental: (e: number) => void,
+        setDomesticEmployee: (e: number) => void,
     },
     userInput: TaxUserInput;
     calculate: () => void;
 }
 
 const Form: FunctionComponent<FormProps> = (props: FormProps) => (
-    <form className="w-full flex flex-col space-y-2 border-r-2 border-secondary border-b-2 md:border-b-0">
+    <form className="w-full flex flex-col space-y-2 border-r border-secondary-dark border-b-2 md:border-b-0">
         <Title>Tus datos</Title>
-        <div className="px-2 flex flex-col space-y-2 w-full">
+        <div className="px-2 flex flex-col space-y-2 w-full py-2">
             <div className="w-full">
                 <Input symb="$" type="number" label="Salario bruto" onChange={(e) => props.setters.setSalary(+e.target.value)} min={0} />
-                <h1 className="text-xl w-full bg-secondary text-white p-2 rounded-tr-md rounded-tl-md font-black">Deducciones</h1>
-                <div className="border-4 border-secondary rounded-br-md rounded-bl-md shadow-lg">
+                <h1 className="text-xl w-full bg-secondary-dark text-white p-2 rounded-tr-md rounded-tl-md font-black">Deducciones</h1>
+                <div className="border-2 border-secondary-dark rounded-br-md rounded-bl-md shadow-lg bg-gray-900">
                     <div className="flex justify-evenly items-center">
                         <Input type="checkbox" label="Cónyuge a cargo" onChange={(e) => props.setters.setSpouse(e.target.checked)} />
                         <Input type="checkbox" label="Jubilado" onChange={(e) => props.setters.setRetired(e.target.checked)} disabled={props.userInput.patagonic} />
@@ -43,7 +43,7 @@ const Form: FunctionComponent<FormProps> = (props: FormProps) => (
                     </div>
                 </div>
             </div>
-            <button className="bg-secondary-light hover:bg-secondary text-white transition-all duration-500 px-4 py-1 rounded-md w-full" onClick={props.calculate}>Calcular</button>
+            <button className="bg-secondary-dark hover:bg-secondary text-white transition-all duration-500 px-4 py-1 rounded-md w-full" onClick={props.calculate}>Calcular</button>
         </div>
     </form>
 );

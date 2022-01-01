@@ -1,15 +1,26 @@
-import DeductionCalculator from "lib/calculator/DeductionCalculator";
-import SalaryCalculator from "lib/calculator/SalaryCalculator";
+import SalaryRange from "lib/config/SalaryRange";
 import TaxConfig from "lib/config/TaxConfig";
-import TaxUserInput from "lib/entities/TaxUserInput";
 
 namespace TaxCalculator {
 
-    export const getIncomeTaxAnnual = (data: TaxUserInput, config: TaxConfig) =>
-        SalaryCalculator.getAnnualSalaryGross(data.salary) - DeductionCalculator.getTotal(data, config);
+    export const getRange = (salary: number, config: TaxConfig): SalaryRange =>
+        config.salaryRanges.find((range: SalaryRange, i: number) => SalaryRange.isInRange(salary, range, config.salaryRanges[i + 1])) || new SalaryRange(0, 0, 0)
 
-    export const getIncomeTaxMonth = (data: TaxUserInput, config: TaxConfig) =>
-        TaxCalculator.getIncomeTaxAnnual(data, config) / 12;
+    export const getSurplus = (salary: number, range: SalaryRange) => salary - range.floor;
+
+    export const getAnnualTax = (salary: number, range: SalaryRange) => range.fixed + TaxCalculator.getSurplus(salary, range) * range.aliquote;
+
+    export const getMonthlyTax = (salary: number, range: SalaryRange) => TaxCalculator.getAnnualTax(salary, range) / 12;
+
+    export const getSummary = (annualDeductedSalary: number, config: TaxConfig) => {
+        const range = getRange(annualDeductedSalary / 12, config);
+        return {
+            annual: TaxCalculator.getAnnualTax(annualDeductedSalary, range),
+            month: TaxCalculator.getMonthlyTax(annualDeductedSalary, range),
+            floor: range.floor,
+            aliquote: range.aliquote * 100,
+        }
+    }
 }
 
 export default TaxCalculator;

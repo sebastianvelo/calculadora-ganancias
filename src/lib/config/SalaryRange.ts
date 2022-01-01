@@ -12,29 +12,8 @@ class SalaryRange {
     this.aliquote = aliquote;
   }
 
-  static isInRange = (salary: number, ranges: SalaryRange[], i: number) =>
-    salary >= ranges[i].floor && salary < ranges[i + 1].floor;
-
-  getSurplus(salary: number) {
-    return salary - this.floor;
-  }
-
-  getAnnualTax(salary: number) {
-    return this.fixed + this.getSurplus(salary) * this.aliquote;
-  }
-
-  getMonthlyTax(salary: number) {
-    return this.getAnnualTax(salary) / 12;
-  }
-
-  getJSON(salary: number) {
-    return {
-      annual: this.getAnnualTax(salary),
-      month: this.getMonthlyTax(salary),
-      floor: this.floor,
-      aliquote: this.aliquote * 100,
-    };
-  }
+  static isInRange = (salary: number, range: SalaryRange, nextRange: SalaryRange) =>
+    salary >= range.floor && salary < nextRange.floor;
 
 }
 

@@ -1,31 +1,24 @@
+import SalaryCalculator from "./calculator/SalaryCalculator";
 import TaxCalculator from "./calculator/TaxCalculator";
 import type TaxConfig from "./config/TaxConfig";
-import SalaryRange from "./config/SalaryRange";
 import TaxSummary from "./entities/TaxSummary";
 import type TaxUserInput from "./entities/TaxUserInput";
-import SalaryCalculator from "./calculator/SalaryCalculator";
 
 namespace Tax {
 
-    export const getIncomeTaxSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary | null => {
-        const tax = TaxCalculator.getIncomeTaxAnnual(userInput, config);
-
-        for (let i = 0; i < config.salaryRanges.length - 1; i += 1) {
-            if (SalaryRange.isInRange(tax / 12, config.salaryRanges, i)) {
-                const range = config.salaryRanges[i];
-                return {
-                    salary: {
-                        net: SalaryCalculator.getMonthlySalaryNet(userInput.salary, range.getAnnualTax(tax)),
-                        gross: userInput.salary
-                    },
-                    tax: range.getJSON(tax)
-                };
-            }
-        }
-        return null;
+    export const getIncomeTaxSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary => {
+        const annualDeductedSalary = SalaryCalculator.getAnnualDeductedSalary(userInput, config);
+        const tax = TaxCalculator.getSummary(annualDeductedSalary, config);
+        return {
+            salary: {
+                net: SalaryCalculator.getMonthlySalaryNet(userInput.salary, tax.month),
+                gross: userInput.salary
+            },
+            tax
+        };
     };
 
-    export const getDefaultSummary = (userInput: TaxUserInput): TaxSummary | null => ({
+    export const getDefaultSummary = (userInput: TaxUserInput): TaxSummary => ({
         salary: {
             net: SalaryCalculator.getMonthlySalaryNet(userInput.salary, 0),
             gross: userInput.salary
@@ -38,7 +31,7 @@ namespace Tax {
         }
     });
 
-    export const getSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary | null =>
+    export const getSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary =>
         userInput.salary > config.floor ? Tax.getIncomeTaxSummary(userInput, config) : Tax.getDefaultSummary(userInput);
 }
 
