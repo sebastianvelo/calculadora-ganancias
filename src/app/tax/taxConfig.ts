@@ -4,6 +4,7 @@ import SalaryRange from "lib/config/SalaryRange";
 const taxConfig: TaxConfig =
 {
     floor: 225937,
+    specialFloor: 260580.64,
     salaryRanges: [
         new SalaryRange(0, 0, 0.05),
         new SalaryRange(97202, 4860.1, 0.09),

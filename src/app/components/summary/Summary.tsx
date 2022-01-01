@@ -8,7 +8,7 @@ interface SummaryProps {
 }
 
 const Summary: FunctionComponent<SummaryProps> = (props: SummaryProps) => (
-    <div className=" w-full h-full space-y-2 justify-center">
+    <div className="w-full h-full space-y-2 justify-center">
         <Title>Resumen</Title>
         {props.summary &&
             <div className="text-lg bg-gray-900 px-2 pb-2 space-y-2 divide-y divide-y-white text-white flex flex-col">

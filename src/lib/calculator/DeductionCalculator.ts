@@ -1,14 +1,23 @@
-import type TaxUserInput from "../entities/TaxUserInput";
+import SalaryCalculator from "lib/calculator/SalaryCalculator";
+import TaxConfig from "lib/config/TaxConfig";
 import type Deduction from "../entities/Deduction";
 import type Deductions from "../entities/Deductions";
-import DeductionFormula from "./DeductionFormula";
+import type TaxUserInput from "../entities/TaxUserInput";
 
 namespace DeductionCalculator {
-    export const getAports = (data: TaxUserInput) => !data.retired ? DeductionFormula.getAports(data.salary) : 0;
+
+    export namespace Formula {
+        export const getRental = (rental: number) => rental * 0.4 * 12;
+        export const getMortgageCredit = (mortgageCredit: number) => mortgageCredit * 12;
+        export const getDomesticEmployee = (domesticEmployee: number) => domesticEmployee * 12;
+        export const getAports = (salary: number) => SalaryCalculator.getSalaryGrossAnnual(salary) * 0.17;
+    }
+
+    export const getAports = (data: TaxUserInput) => !data.retired ? Formula.getAports(data.salary) : 0;
 
     export const getRental = (data: TaxUserInput, deductions: Deductions) => {
         if (!data.rental) return 0;
-        const deduction = DeductionFormula.getRental(data.rental);
+        const deduction = Formula.getRental(data.rental);
         return deduction > deductions.max.rental
             ? deductions.max.rental
             : deduction;
@@ -16,7 +25,7 @@ namespace DeductionCalculator {
 
     export const getMortgageCredit = (data: TaxUserInput, deductions: Deductions) => {
         if (!data.mortgageCredit) return 0;
-        const deduction = DeductionFormula.getMortgageCredit(data.mortgageCredit);
+        const deduction = Formula.getMortgageCredit(data.mortgageCredit);
         return deduction > deductions.max.mortgageCredit
             ? deductions.max.mortgageCredit
             : deduction;
@@ -24,7 +33,7 @@ namespace DeductionCalculator {
 
     export const getDomesticEmployee = (data: TaxUserInput, deductions: Deductions) => {
         if (!data.domesticEmployee) return 0;
-        const deduction = DeductionFormula.getDomesticEmployee(data.domesticEmployee);
+        const deduction = Formula.getDomesticEmployee(data.domesticEmployee);
         return deduction > deductions.max.domesticEmployee
             ? deductions.max.domesticEmployee
             : deduction;
@@ -44,21 +53,22 @@ namespace DeductionCalculator {
             : deduction.retired * data.children;
     };
 
-    export const getSpecial = (data: TaxUserInput, deduction: Deduction) => {
+    export const getSpecial = (data: TaxUserInput, deduction: Deduction, floor: number) => {
+        if(data.salary > floor) return 0;
         if (!data.patagonic && !data.retired) return deduction.def;
         return !data.patagonic ? deduction.patagonic : deduction.retired;
     };
 
     export const getMinimumNonTaxable = (data: TaxUserInput, deduction: Deduction) => !data.patagonic ? deduction.def : deduction.patagonic;
 
-    export const getTotal = (data: TaxUserInput, deductions: Deductions) => (
-        DeductionCalculator.getChildren(data, deductions.children) +
-        DeductionCalculator.getSpouse(data, deductions.spouse) +
-        DeductionCalculator.getSpecial(data, deductions.special) +
-        DeductionCalculator.getMinimumNonTaxable(data, deductions.minimumNonTaxable) +
-        DeductionCalculator.getDomesticEmployee(data, deductions) +
-        DeductionCalculator.getMortgageCredit(data, deductions) +
-        DeductionCalculator.getRental(data, deductions) +
+    export const getTotal = (data: TaxUserInput, config: TaxConfig) => (
+        DeductionCalculator.getChildren(data, config.deductions.children) +
+        DeductionCalculator.getSpouse(data, config.deductions.spouse) +
+        DeductionCalculator.getSpecial(data, config.deductions.special, config.specialFloor) +
+        DeductionCalculator.getMinimumNonTaxable(data, config.deductions.minimumNonTaxable) +
+        DeductionCalculator.getDomesticEmployee(data, config.deductions) +
+        DeductionCalculator.getMortgageCredit(data, config.deductions) +
+        DeductionCalculator.getRental(data, config.deductions) +
         DeductionCalculator.getAports(data)
     );
 }

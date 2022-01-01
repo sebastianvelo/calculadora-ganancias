@@ -3,6 +3,7 @@ import type SalaryRange from "./SalaryRange";
 
 interface TaxConfig {
     floor: number;
+    specialFloor: number;
     salaryRanges: SalaryRange[];
     deductions: Deductions;
 }
