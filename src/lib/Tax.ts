@@ -15,7 +15,7 @@ namespace Tax {
                 const range = config.salaryRanges[i];
                 return {
                     salary: {
-                        net: SalaryCalculator.getSalaryNetMonth(userInput.salary, range.getAnnualTax(tax)),
+                        net: SalaryCalculator.getMonthlySalaryNet(userInput.salary, range.getAnnualTax(tax)),
                         gross: userInput.salary
                     },
                     tax: range.getJSON(tax)
@@ -27,7 +27,7 @@ namespace Tax {
 
     export const getDefaultSummary = (userInput: TaxUserInput): TaxSummary | null => ({
         salary: {
-            net: SalaryCalculator.getSalaryNetMonth(userInput.salary, 0),
+            net: SalaryCalculator.getMonthlySalaryNet(userInput.salary, 0),
             gross: userInput.salary
         },
         tax: {

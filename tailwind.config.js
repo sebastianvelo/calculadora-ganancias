@@ -65,6 +65,7 @@ module.exports = {
   variants: {
     extend: {
       width: ['hover', 'focus'],
+      borderWidth: ['hover', 'focus'],
       ringWidth: ['hover'],
       ringColor: ['hover'],
       letterSpacing: ['hover', 'focus'],

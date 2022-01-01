@@ -20,19 +20,19 @@ interface FormProps {
 }
 
 const Form: FunctionComponent<FormProps> = (props: FormProps) => (
-    <form className="w-full flex flex-col space-y-2 border-r-2 border-black border-b-2 md:border-b-0">
+    <form className="w-full flex flex-col space-y-2 border-r-2 border-secondary border-b-2 md:border-b-0">
         <Title>Tus datos</Title>
-        <div className="px-2 py-4 flex flex-col items-center space-y-2">
-            <div>
+        <div className="px-2 flex flex-col space-y-2 w-full">
+            <div className="w-full">
                 <Input symb="$" type="number" label="Salario bruto" onChange={(e) => props.setters.setSalary(+e.target.value)} min={0} />
-                <h1 className="text-xl w-full bg-secondary-light text-white p-2 rounded-tr-md rounded-tl-md font-black">Deducciones</h1>
-                <div className="border-2 border-secondary-light rounded-br-md rounded-bl-md">
+                <h1 className="text-xl w-full bg-secondary text-white p-2 rounded-tr-md rounded-tl-md font-black">Deducciones</h1>
+                <div className="border-4 border-secondary rounded-br-md rounded-bl-md shadow-lg">
                     <div className="flex justify-evenly items-center">
                         <Input type="checkbox" label="Cónyuge a cargo" onChange={(e) => props.setters.setSpouse(e.target.checked)} />
                         <Input type="checkbox" label="Jubilado" onChange={(e) => props.setters.setRetired(e.target.checked)} disabled={props.userInput.patagonic} />
                         <Input type="checkbox" label="Zona patagónica" onChange={(e) => props.setters.setPatagonic(e.target.checked)} disabled={props.userInput.retired} />
                     </div>
-                    <div className="flex flex-col sm:flex-row justify-evenly items-center">
+                    <div className="flex flex-row justify-evenly items-center">
                         <Input type="number" label="Cantidad de hijos" onChange={(e) => props.setters.setChildren(+e.target.value)} min={0} />
                         <Input type="range" label={`Deduzco un ${props.userInput.childrenDeduction ?? 0}%`} onChange={(e) => props.setters.setChildrenDeduction(+e.target.value)} min={0} max={100} step={50} />
                     </div>

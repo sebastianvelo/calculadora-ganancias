@@ -10,7 +10,8 @@ namespace DeductionCalculator {
         export const getRental = (rental: number) => rental * 0.4 * 12;
         export const getMortgageCredit = (mortgageCredit: number) => mortgageCredit * 12;
         export const getDomesticEmployee = (domesticEmployee: number) => domesticEmployee * 12;
-        export const getAports = (salary: number) => SalaryCalculator.getSalaryGrossAnnual(salary) * 0.17;
+        export const getAports = (salary: number) => SalaryCalculator.getAnnualSalaryGross(salary) * 0.17;
+        export const getChildren = (deduction: number, children: number, childrenDeduction: number) => deduction * children * (childrenDeduction / 100);
     }
 
     export const getAports = (data: TaxUserInput) => !data.retired ? Formula.getAports(data.salary) : 0;
@@ -46,15 +47,15 @@ namespace DeductionCalculator {
     };
 
     export const getChildren = (data: TaxUserInput, deduction: Deduction) => {
-        if (!data.children) return 0;
-        if (!data.patagonic && !data.retired) return deduction.def * data.children;
+        if (!data.children || !data.childrenDeduction) return 0;
+        if (!data.patagonic && !data.retired) return Formula.getChildren(deduction.def, data.children, data.childrenDeduction);
         return !data.patagonic
-            ? deduction.patagonic * data.children
-            : deduction.retired * data.children;
+            ? Formula.getChildren(deduction.patagonic, data.children, data.childrenDeduction)
+            : Formula.getChildren(deduction.retired, data.children, data.childrenDeduction);
     };
 
     export const getSpecial = (data: TaxUserInput, deduction: Deduction, floor: number) => {
-        if(data.salary > floor) return 0;
+        if (data.salary > floor) return 0;
         if (!data.patagonic && !data.retired) return deduction.def;
         return !data.patagonic ? deduction.patagonic : deduction.retired;
     };
