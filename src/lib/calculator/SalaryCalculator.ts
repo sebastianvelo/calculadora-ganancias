@@ -26,6 +26,8 @@ namespace SalaryCalculator {
         gross: userInput.salary
     });
 
+    export const getDefaultSummary = (userInput: TaxUserInput): SalarySummary => SalaryCalculator.getSummary(userInput, 0);
+
 }
 
 export default SalaryCalculator;

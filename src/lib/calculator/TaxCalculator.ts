@@ -13,7 +13,7 @@ namespace TaxCalculator {
     export const getAnnualTax = (salary: number, range: SalaryRange) => range.fixed + (TaxCalculator.getSurplus(salary, range) * range.aliquote);
 
     export const getMonthlyTax = (salary: number, range: SalaryRange) => TaxCalculator.getAnnualTax(salary, range) / 12;
-    
+
     export const getAliquote = (salary: number, range: SalaryRange) => (TaxCalculator.getMonthlyTax(salary, range) / salary) * 100;
 
     export const getSummary = (annualSalary: number, config: TaxConfig): TaxSummary => {
@@ -26,6 +26,14 @@ namespace TaxCalculator {
             aliquote: TaxCalculator.getAliquote(annualSalary, range)
         }
     }
+
+    export const getDefaultSummary = (): TaxSummary => ({
+        annual: 0,
+        month: 0,
+        floor: 0,
+        marginalAliquote: 0,
+        aliquote: 0
+    })
 }
 
 export default TaxCalculator;
