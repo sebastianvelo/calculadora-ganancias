@@ -20,9 +20,10 @@ namespace Calculator {
         salary: SalaryCalculator.getSummary(userInput, 0),
         tax: {
             annual: 0,
-            month: 0,
+        month: 0,
             floor: 0,
-            aliquote: 0,
+            marginalAliquote: 0,
+            aliquote: 0
         }
     });
 

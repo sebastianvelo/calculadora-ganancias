@@ -6,7 +6,7 @@ const taxConfig: TaxConfig =
     floor: 225937,
     specialFloor: 260580.64,
     salaryRanges: [
-        new SalaryRange(1, 0, 0.05),
+        new SalaryRange(0, 0, 0.05),
         new SalaryRange(97202, 4860.1, 0.09),
         new SalaryRange(194404.01, 13608.28, 0.12),
         new SalaryRange(291606.01, 25272.53, 0.15),

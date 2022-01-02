@@ -11,6 +11,7 @@ const getSummaryModel = (summary?: Summary | null): SummaryModel => ({
         annual: `$${formatNumber(summary?.tax.annual)}`,
         month: `$${formatNumber(summary?.tax.month)}`,
         floor: `$${formatNumber(summary?.tax.floor)}`,
+        marginalAliquote: `${formatNumber(summary?.tax.marginalAliquote)}%`,
         aliquote: `${formatNumber(summary?.tax.aliquote)}%`,
     }
 });

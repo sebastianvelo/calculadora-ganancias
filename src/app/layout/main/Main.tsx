@@ -29,12 +29,6 @@ const Main: FunctionComponent = () => {
 
     const calculate = () => setSummary(Calculator.getSummary(getUserInput(), taxConfig))
 
-    Array(50).fill(0).forEach((_, i) => {
-        const gross = 120_000 + (10000 * i)
-        // console.log(gross);
-        console.log(Calculator.getSummary({ salary: gross }, taxConfig).salary.net);
-    })
-
     return (
         <main className="flex xl:flex-row flex-col h-full w-full bg-gradient-to-bl from-green-50 to-green-200">
             <TaxForm userInput={getUserInput()} setters={setters} calculate={calculate} />

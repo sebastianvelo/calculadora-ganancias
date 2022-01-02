@@ -7,6 +7,7 @@ interface SummaryModel {
         annual: string;
         floor: string;
         month: string;
+        marginalAliquote: string;
         aliquote: string;
     }
 }

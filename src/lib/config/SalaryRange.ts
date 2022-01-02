@@ -15,6 +15,8 @@ class SalaryRange {
   static isInRange = (salary: number, range: SalaryRange, nextRange: SalaryRange) =>
     salary >= range.floor && salary < nextRange.floor;
 
+  static getDefault = () => new SalaryRange(0, 0, 0);
+
 }
 
 export default SalaryRange;
