@@ -5,6 +5,6 @@ interface TitleProps {
 }
 
 const Title: FunctionComponent<TitleProps> = (props: TitleProps) =>
-    <h2 className="font-bold text-3xl bg-gray-900 text-white px-2 py-4">{props.children}</h2>
+    <h2 className="font-bold text-3xl bg-gradient-to-b from-gray-800 to-black text-white px-2 py-4">{props.children}</h2>
 
 export default Title;

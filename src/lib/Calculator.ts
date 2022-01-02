@@ -4,7 +4,7 @@ import type TaxConfig from "./config/TaxConfig";
 import TaxSummary from "./entities/TaxSummary";
 import type TaxUserInput from "./entities/TaxUserInput";
 
-namespace Tax {
+namespace Calculator {
 
     export const getIncomeTaxSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary => {
         const annualDeductedSalary = SalaryCalculator.getAnnualDeductedSalary(userInput, config);
@@ -32,7 +32,7 @@ namespace Tax {
     });
 
     export const getSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary =>
-        userInput.salary > config.floor ? Tax.getIncomeTaxSummary(userInput, config) : Tax.getDefaultSummary(userInput);
+        userInput.salary > config.floor ? Calculator.getIncomeTaxSummary(userInput, config) : Calculator.getDefaultSummary(userInput);
 }
 
-export default Tax;
+export default Calculator;

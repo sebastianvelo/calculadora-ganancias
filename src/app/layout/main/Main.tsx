@@ -1,6 +1,6 @@
 import TaxSummary from "lib/entities/TaxSummary";
 import TaxUserInput from "lib/entities/TaxUserInput";
-import Tax from "lib/Tax";
+import Calculator from "lib/Calculator";
 import getTaxSummaryModel from "lib/view/getTaxSummaryModel";
 import { FunctionComponent, useState } from "react";
 import Form from "app/components/form/Form";
@@ -27,10 +27,10 @@ const Main: FunctionComponent = () => {
         salary, spouse, retired, patagonic, children, childrenDeduction, rental, mortgageCredit, domesticEmployee
     })
 
-    const calculate = () => setSummary(Tax.getSummary(getUserInput(), taxConfig))
+    const calculate = () => setSummary(Calculator.getSummary(getUserInput(), taxConfig))
 
     return (
-        <main className="flex xl:flex-row flex-col h-full w-full bg-gradient-to-bl from-green-50 to-green-200">
+        <main className="flex xl:flex-row flex-col h-full w-full bg-gradient-to-bl from-green-50 to-green-100">
             <Form userInput={getUserInput()} setters={setters} calculate={calculate} />
             <Summary summary={getTaxSummaryModel(summary)} />
         </main>
