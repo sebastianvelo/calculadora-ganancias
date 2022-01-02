@@ -14,30 +14,26 @@ namespace DeductionCalculator {
         export const getChildren = (deduction: number, children: number, childrenDeduction: number) => deduction * children * (childrenDeduction / 100);
     }
 
+    export const getMin = (value: number, max: number) => value > max ? max : value;
+
     export const getAports = (data: TaxUserInput) => !data.retired ? Formula.getAports(data.salary) : 0;
 
     export const getRental = (data: TaxUserInput, deductions: Deductions) => {
         if (!data.rental) return 0;
         const deduction = Formula.getRental(data.rental);
-        return deduction > deductions.max.rental
-            ? deductions.max.rental
-            : deduction;
+        return DeductionCalculator.getMin(deduction, deductions.max.rental);
     };
 
     export const getMortgageCredit = (data: TaxUserInput, deductions: Deductions) => {
         if (!data.mortgageCredit) return 0;
         const deduction = Formula.getMortgageCredit(data.mortgageCredit);
-        return deduction > deductions.max.mortgageCredit
-            ? deductions.max.mortgageCredit
-            : deduction;
+        return DeductionCalculator.getMin(deduction, deductions.max.mortgageCredit);
     };
 
     export const getDomesticEmployee = (data: TaxUserInput, deductions: Deductions) => {
         if (!data.domesticEmployee) return 0;
         const deduction = Formula.getDomesticEmployee(data.domesticEmployee);
-        return deduction > deductions.max.domesticEmployee
-            ? deductions.max.domesticEmployee
-            : deduction;
+        return DeductionCalculator.getMin(deduction, deductions.max.domesticEmployee);
     };
 
     export const getSpouse = (data: TaxUserInput, deduction: Deduction) => {

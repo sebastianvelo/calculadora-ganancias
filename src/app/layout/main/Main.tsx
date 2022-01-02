@@ -30,7 +30,7 @@ const Main: FunctionComponent = () => {
     const calculate = () => setSummary(Tax.getSummary(getUserInput(), taxConfig))
 
     return (
-        <main className="flex xl:flex-row flex-col h-full w-full bg-black text-white">
+        <main className="flex xl:flex-row flex-col h-full w-full bg-gradient-to-bl from-green-50 to-green-200">
             <Form userInput={getUserInput()} setters={setters} calculate={calculate} />
             <Summary summary={getTaxSummaryModel(summary)} />
         </main>

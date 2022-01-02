@@ -8,7 +8,7 @@ namespace TaxCalculator {
 
     export const getSurplus = (salary: number, range: SalaryRange) => salary - range.floor;
 
-    export const getAnnualTax = (salary: number, range: SalaryRange) => range.fixed + TaxCalculator.getSurplus(salary, range) * range.aliquote;
+    export const getAnnualTax = (salary: number, range: SalaryRange) => range.fixed + (TaxCalculator.getSurplus(salary, range) * range.aliquote);
 
     export const getMonthlyTax = (salary: number, range: SalaryRange) => TaxCalculator.getAnnualTax(salary, range) / 12;
 

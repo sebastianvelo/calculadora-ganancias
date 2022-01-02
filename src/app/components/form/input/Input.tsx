@@ -12,7 +12,7 @@ export interface InputProps {
 }
 
 const Input: FunctionComponent<InputProps> = (props: InputProps) => (
-    <div className="flex flex-col p-2 items-center w-full space-y-2">
+    <div className="flex flex-col p-2 items-center justify-between w-full space-y-2 transition-all duration-200">
         <label className="text-xs md:text-lg font-bold">{props.label}</label>
         <div className="w-full flex">
             {props.symb && <div className="border border-black bg-secondary-dark text-white w-8 flex items-center justify-center">{props.symb}</div>}

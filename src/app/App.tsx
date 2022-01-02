@@ -3,7 +3,7 @@ import Footer from "./layout/footer/Footer";
 import Main from "./layout/main/Main";
 
 const App: FunctionComponent = () => (
-    <div className="flex flex-col xl:h-screen w-full">
+    <div className="flex flex-col xl:h-screen w-full xl:overflow-y-hidden">
         <Main />
         <Footer />
     </div>
