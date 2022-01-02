@@ -1,28 +1,23 @@
 import SalaryCalculator from "./calculator/SalaryCalculator";
 import TaxCalculator from "./calculator/TaxCalculator";
 import type TaxConfig from "./config/TaxConfig";
-import TaxSummary from "./entities/TaxSummary";
+import Summary from "./entities/summary/Summary";
 import type TaxUserInput from "./entities/TaxUserInput";
 
 namespace Calculator {
 
-    export const getIncomeTaxSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary => {
-        const annualDeductedSalary = SalaryCalculator.getAnnualDeductedSalary(userInput, config);
-        const tax = TaxCalculator.getSummary(annualDeductedSalary, config);
+    export const getIncomeTaxSummary = (userInput: TaxUserInput, config: TaxConfig): Summary => {
+        const annualSalary = SalaryCalculator.getAnnualSalaryGrossWithDeductions(userInput, config);
+        const tax = TaxCalculator.getSummary(annualSalary, config);
+        const salary = SalaryCalculator.getSummary(userInput, tax.month);
         return {
-            salary: {
-                net: SalaryCalculator.getMonthlySalaryNet(userInput.salary, tax.month),
-                gross: userInput.salary
-            },
+            salary,
             tax
         };
     };
 
-    export const getDefaultSummary = (userInput: TaxUserInput): TaxSummary => ({
-        salary: {
-            net: SalaryCalculator.getMonthlySalaryNet(userInput.salary, 0),
-            gross: userInput.salary
-        },
+    export const getDefaultSummary = (userInput: TaxUserInput): Summary => ({
+        salary: SalaryCalculator.getSummary(userInput, 0),
         tax: {
             annual: 0,
             month: 0,
@@ -31,7 +26,7 @@ namespace Calculator {
         }
     });
 
-    export const getSummary = (userInput: TaxUserInput, config: TaxConfig): TaxSummary =>
+    export const getSummary = (userInput: TaxUserInput, config: TaxConfig): Summary =>
         userInput.salary > config.floor ? Calculator.getIncomeTaxSummary(userInput, config) : Calculator.getDefaultSummary(userInput);
 }
 

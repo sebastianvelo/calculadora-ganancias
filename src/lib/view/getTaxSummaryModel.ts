@@ -1,8 +1,8 @@
-import TaxSummary from "lib/entities/TaxSummary";
-import TaxSummaryModel from "lib/model/TaxSummaryModel";
+import Summary from "lib/entities/summary/Summary";
+import SummaryModel from "lib/model/SummaryModel";
 import { formatNumber } from "lib/shared/Format";
 
-const getTaxSummaryModel = (summary?: TaxSummary | null): TaxSummaryModel => ({
+const getSummaryModel = (summary?: Summary | null): SummaryModel => ({
     salary: {
         net: `$${formatNumber(summary?.salary.net)}`,
         gross: `$${formatNumber(summary?.salary.gross)}`,
@@ -15,4 +15,4 @@ const getTaxSummaryModel = (summary?: TaxSummary | null): TaxSummaryModel => ({
     }
 });
 
-export default getTaxSummaryModel;
+export default getSummaryModel;

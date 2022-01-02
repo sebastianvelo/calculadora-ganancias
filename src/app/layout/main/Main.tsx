@@ -1,11 +1,11 @@
-import TaxSummary from "lib/entities/TaxSummary";
-import TaxUserInput from "lib/entities/TaxUserInput";
-import Calculator from "lib/Calculator";
-import getTaxSummaryModel from "lib/view/getTaxSummaryModel";
-import { FunctionComponent, useState } from "react";
-import Form from "app/components/form/Form";
-import Summary from "app/components/summary/Summary";
+import TaxForm from "app/components/form/TaxForm";
+import SummarySection from "app/components/summary/SummarySection";
 import taxConfig from "app/tax/taxConfig";
+import Calculator from "lib/Calculator";
+import Summary from "lib/entities/summary/Summary";
+import TaxUserInput from "lib/entities/TaxUserInput";
+import getSummaryModel from "lib/view/getTaxSummaryModel";
+import { FunctionComponent, useState } from "react";
 
 const Main: FunctionComponent = () => {
     const [salary, setSalary] = useState<number>(0);
@@ -13,11 +13,11 @@ const Main: FunctionComponent = () => {
     const [retired, setRetired] = useState<boolean>(false);
     const [patagonic, setPatagonic] = useState<boolean>(false);
     const [children, setChildren] = useState<number>(0);
-    const [childrenDeduction, setChildrenDeduction] = useState<0 | 50 | 100>(0);
+    const [childrenDeduction, setChildrenDeduction] = useState<(0 | 50 | 100)>(0);
     const [rental, setRental] = useState<number>(0);
     const [mortgageCredit, setMortgageCredit] = useState<number>(0);
     const [domesticEmployee, setDomesticEmployee] = useState<number>(0);
-    const [summary, setSummary] = useState<TaxSummary | null>();
+    const [summary, setSummary] = useState<Summary>();
 
     const setters = {
         setSalary, setSpouse, setRetired, setPatagonic, setChildren, setChildrenDeduction, setRental, setMortgageCredit, setDomesticEmployee
@@ -29,10 +29,16 @@ const Main: FunctionComponent = () => {
 
     const calculate = () => setSummary(Calculator.getSummary(getUserInput(), taxConfig))
 
+    Array(50).fill(0).forEach((_, i) => {
+        const gross = 120_000 + (10000 * i)
+        // console.log(gross);
+        console.log(Calculator.getSummary({ salary: gross }, taxConfig).salary.net);
+    })
+
     return (
-        <main className="flex xl:flex-row flex-col h-full w-full bg-gradient-to-bl from-green-50 to-green-100">
-            <Form userInput={getUserInput()} setters={setters} calculate={calculate} />
-            <Summary summary={getTaxSummaryModel(summary)} />
+        <main className="flex xl:flex-row flex-col h-full w-full bg-gradient-to-bl from-green-50 to-green-200">
+            <TaxForm userInput={getUserInput()} setters={setters} calculate={calculate} />
+            <SummarySection summary={getSummaryModel(summary)} />
         </main>
     )
 };

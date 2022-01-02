@@ -1,5 +1,6 @@
 import SalaryRange from "lib/config/SalaryRange";
 import TaxConfig from "lib/config/TaxConfig";
+import TaxSummary from "lib/entities/summary/TaxSummary";
 
 namespace TaxCalculator {
 
@@ -12,11 +13,11 @@ namespace TaxCalculator {
 
     export const getMonthlyTax = (salary: number, range: SalaryRange) => TaxCalculator.getAnnualTax(salary, range) / 12;
 
-    export const getSummary = (annualDeductedSalary: number, config: TaxConfig) => {
-        const range = getRange(annualDeductedSalary / 12, config);
+    export const getSummary = (annualSalary: number, config: TaxConfig): TaxSummary => {
+        const range = getRange(annualSalary / 12, config);
         return {
-            annual: TaxCalculator.getAnnualTax(annualDeductedSalary, range),
-            month: TaxCalculator.getMonthlyTax(annualDeductedSalary, range),
+            annual: TaxCalculator.getAnnualTax(annualSalary, range),
+            month: TaxCalculator.getMonthlyTax(annualSalary, range),
             floor: range.floor,
             aliquote: range.aliquote * 100,
         }

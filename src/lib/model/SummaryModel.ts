@@ -1,4 +1,4 @@
-interface TaxSummaryModel {
+interface SummaryModel {
     salary: {
         net: string;
         gross: string;
@@ -11,4 +11,4 @@ interface TaxSummaryModel {
     }
 }
 
-export default TaxSummaryModel;
+export default SummaryModel;
