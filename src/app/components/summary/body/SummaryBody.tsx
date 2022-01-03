@@ -14,7 +14,6 @@ const SummaryBody: FunctionComponent<SummaryBodyProps> = (props: SummaryBodyProp
                 <SummaryRow title="Sueldo en mano" value={{ label: props.summary.salary.net, className: "text-green-200" }} />
                 <SummaryRow title="Impuesto anual" value={{ label: props.summary.tax.annual, className: "text-red-300" }} />
                 <SummaryRow title="Impuesto mensual" value={{ label: props.summary.tax.month, className: "text-red-300" }} />
-                <SummaryRow title="Alicuota marginal" value={{ label: props.summary.tax.marginalAliquote, className: "text-white" }} />
             </div >
         }
         <p className="text-black text-right font-bold">Este resultado es una aproximación.</p>

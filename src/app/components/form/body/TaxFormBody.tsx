@@ -18,6 +18,12 @@ export interface TaxFormBodyProps {
     calculate: () => void;
 }
 
+const rangeLabel = {
+    0: 'Los deduce mi cónyugue',
+    50: 'Deducimos mitad cada uno',
+    100: 'Deduzco sólo yo'
+};
+
 const TaxFormBody: FunctionComponent<TaxFormBodyProps> = (props: TaxFormBodyProps) => (
     <div className="flex flex-col w-full h-full lg:px-4 py-2 space-y-2">
         <div className="w-full">
@@ -31,7 +37,7 @@ const TaxFormBody: FunctionComponent<TaxFormBodyProps> = (props: TaxFormBodyProp
                 </div>
                 <div className="flex justify-evenly items-center">
                     <Input type="number" label="Cantidad de hijos" onChange={(e) => props.setters.setChildren(+e.target.value)} min={0} />
-                    <Input type="range" label={`Deduzco un ${props.userInput.childrenDeduction ?? 0}%`} onChange={(e) => props.setters.setChildrenDeduction(+e.target.value)} min={0} max={100} step={50} />
+                    <Input type="range" label={rangeLabel[props.userInput.childrenDeduction || 0]} onChange={(e) => props.setters.setChildrenDeduction(+e.target.value)} min={0} max={100} step={50} />
                 </div>
                 <div className="flex flex-col md:flex-row">
                     <Input symb="$" type="number" label="Credito hipotecario" onChange={(e) => props.setters.setMortgageCredit(+e.target.value)} min={0} />
