@@ -21,7 +21,8 @@ const taxConfig: TaxConfig =
         max: {
             rental: 252564.84,
             mortgageCredit: 20000,
-            domesticEmployee: 167678
+            domesticEmployee: 252564.84,
+            aports: 283752.60,
         },
         spouse: {
             def: 235457.25,

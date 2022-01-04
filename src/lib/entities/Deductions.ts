@@ -5,6 +5,7 @@ interface Deductions {
         rental: number;
         mortgageCredit: number;
         domesticEmployee: number;
+        aports: number;
     };
     spouse: Deduction;
     children: Deduction;
