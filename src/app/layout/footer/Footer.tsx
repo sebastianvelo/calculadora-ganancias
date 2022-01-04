@@ -5,6 +5,6 @@ const Footer: FunctionComponent = () => (
         <p>Calculadora de Impuesto a las Ganancias 2022 | </p>
         <a className="text-secondary-light" target="_blank" href="https://www.linkedin.com/in/sebastian-velo/">Hecho con ♥ por Sebastián Velo</a>
     </footer>
-)
+);
 
 export default Footer;

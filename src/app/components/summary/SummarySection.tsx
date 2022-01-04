@@ -8,6 +8,7 @@ const SummarySection: FunctionComponent<SummaryProps> = (props: SummaryProps) =>
     <div className="w-full h-full justify-center">
         <Title>Resultado</Title>
         <SummaryBody {...props} />
-    </div >);
+    </div >
+);
 
 export default SummarySection;
