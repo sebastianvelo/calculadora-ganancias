@@ -4,7 +4,10 @@ interface TitleProps {
     children: string;
 }
 
-const Title: FunctionComponent<TitleProps> = (props: TitleProps) =>
-    <h2 className="font-bold text-3xl bg-gradient-to-b from-gray-800 to-black text-white px-2 py-4">{props.children}</h2>
+const Title: FunctionComponent<TitleProps> = (props: TitleProps) => (
+    <h1 className="text-xl w-full bg-gradient-to-b from-secondary-dark to-green-900 text-white p-2 rounded-tr-md rounded-tl-md font-black">
+        {props.children}
+    </h1>
+);
 
 export default Title;

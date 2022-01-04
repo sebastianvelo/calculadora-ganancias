@@ -1,12 +1,12 @@
 import { FunctionComponent } from "react";
-import Title from "../shared/title/Title";
+import Header from "../shared/header/Header";
 import SummaryBody, { SummaryBodyProps } from "./body/SummaryBody";
 
 interface SummaryProps extends SummaryBodyProps { }
 
 const SummarySection: FunctionComponent<SummaryProps> = (props: SummaryProps) => (
     <div className="w-full h-full justify-center">
-        <Title>Resultado</Title>
+        <Header>Resultado</Header>
         <SummaryBody {...props} />
     </div >
 );

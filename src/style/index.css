@@ -31,23 +31,23 @@
     cursor: pointer;
     animate: 0.2s;
     box-shadow: 0px 0px 0px #000000;
-    background: #166534;
+    background: #00ad45;
     border-radius: 25px;
     border: 0px solid #000000;
   }
   input[type="range"]::-webkit-slider-thumb {
     box-shadow: 0px 0px 0px #40651b;
-    border: 2px solid #166534;
+    border: 2px solid black;
     height: 26px;
-    width: 16px;
-    border-radius: 0px;
+    width: 26px;
+    border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -9.5px;
   }
   input[type="range"]:focus::-webkit-slider-runnable-track {
-    background: #166534;
+    background: #00ad45;
   }
   input[type="range"]::-moz-range-track {
     width: 100%;
@@ -55,16 +55,16 @@
     cursor: pointer;
     animate: 0.2s;
     box-shadow: 0px 0px 0px #000000;
-    background: #166534;
+    background: #00ad45;
     border-radius: 25px;
     border: 0px solid #000000;
   }
   input[type="range"]::-moz-range-thumb {
     box-shadow: 0px 0px 0px #40651b;
-    border: 2px solid #166534;
+    border: 2px solid black;
     height: 26px;
-    width: 16px;
-    border-radius: 0px;
+    width: 26px;
+    border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
   }
@@ -78,13 +78,13 @@
     color: transparent;
   }
   input[type="range"]::-ms-fill-lower {
-    background: #166534;
+    background: #00ad45;
     border: 0px solid #000000;
     border-radius: 50px;
     box-shadow: 0px 0px 0px #000000;
   }
   input[type="range"]::-ms-fill-upper {
-    background: #166534;
+    background: #00ad45;
     border: 0px solid #000000;
     border-radius: 50px;
     box-shadow: 0px 0px 0px #000000;
@@ -92,21 +92,21 @@
   input[type="range"]::-ms-thumb {
     margin-top: 1px;
     box-shadow: 0px 0px 0px #40651b;
-    border: 2px solid #166534;
+    border: 2px solid black;
     height: 26px;
-    width: 16px;
-    border-radius: 0px;
+    width: 26px;
+    border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
   }
   input[type="range"]:focus::-ms-fill-lower {
-    background: #166534;
+    background: #00ad45;
   }
   input[type="range"]:focus::-ms-fill-upper {
-    background: #166534;
+    background: #00ad45;
   }
   input[type="checkbox"] {
-    accent-color: #166534;
+    accent-color: #00ad45;
   }
 }
 
@@ -118,10 +118,10 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px rgb(0, 61, 33);
+  box-shadow: inset 0 0 5px #00ad45;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(8, 139, 107);
+  background-color: #00ad45;
 }
