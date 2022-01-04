@@ -13,6 +13,12 @@ const getSummaryModel = (summary?: Summary | null): SummaryModel => ({
         floor: `$${formatNumber(summary?.tax.floor)}`,
         marginalAliquote: `${formatNumber(summary?.tax.marginalAliquote)}%`,
         aliquote: `${formatNumber(summary?.tax.aliquote)}%`,
+    },
+    aports: {
+        retired: `$${formatNumber(summary?.aports.retired)}`,
+        healthInsurance: `$${formatNumber(summary?.aports.healthInsurance)}`,
+        pami: `$${formatNumber(summary?.aports.pami)}`,
+        total: `$${formatNumber(summary?.aports.total)}`,
     }
 });
 

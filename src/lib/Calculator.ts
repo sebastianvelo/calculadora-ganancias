@@ -1,3 +1,4 @@
+import AportsCalculator from "./calculator/AportsCalculator";
 import SalaryCalculator from "./calculator/SalaryCalculator";
 import TaxCalculator from "./calculator/TaxCalculator";
 import type TaxConfig from "./config/TaxConfig";
@@ -10,15 +11,18 @@ namespace Calculator {
         const annualSalary = SalaryCalculator.getAnnualSalaryGrossWithDeductions(userInput, config);
         const tax = TaxCalculator.getSummary(annualSalary, config);
         const salary = SalaryCalculator.getSummary(userInput, tax.month);
+        const aports = AportsCalculator.getSummary(userInput.salary);
         return {
             salary,
-            tax
+            tax,
+            aports
         };
     };
 
     export const getDefaultSummary = (userInput: TaxUserInput): Summary => ({
         salary: SalaryCalculator.getDefaultSummary(userInput),
-        tax: TaxCalculator.getDefaultSummary()
+        tax: TaxCalculator.getDefaultSummary(),
+        aports: AportsCalculator.getSummary(userInput.salary),
     });
 
     export const getSummary = (userInput: TaxUserInput, config: TaxConfig): Summary =>

@@ -9,6 +9,12 @@ interface SummaryModel {
         month: string;
         marginalAliquote: string;
         aliquote: string;
+    },
+    aports: {
+        retired: string;
+        healthInsurance: string;
+        pami: string;
+        total: string;
     }
 }
 
