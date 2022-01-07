@@ -48,7 +48,7 @@ const TaxFormBody: FunctionComponent<TaxFormBodyProps> = (props: TaxFormBodyProp
                 </div>
             </Section>
         </div>
-        <button className="border border-black bg-gradient-to-b from-secondary-dark to-green-900 hover:from-secondary-dark hover:to-green-700 text-white transition-all duration-200 px-4 py-1 rounded-md w-full font-bold" onClick={props.calculate}>Calcular</button>
+        <button className="border border-black bg-gradient-to-b from-secondary-dark to-secondary-darkest hover:from-secondary-dark hover:to-secondary text-white transition-all duration-200 px-4 py-1 rounded-md w-full font-bold" onClick={props.calculate}>Calcular</button>
     </div>
 );
 
