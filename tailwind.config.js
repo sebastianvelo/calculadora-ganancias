@@ -35,6 +35,7 @@ module.exports = {
           light: colors.green[300],
           DEFAULT: colors.green[500],
           dark: colors.green[600],
+          darkest: colors.green[900],
         },
         danger: {
           light: colors.red[300],

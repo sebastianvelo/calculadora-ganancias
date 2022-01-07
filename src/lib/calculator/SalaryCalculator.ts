@@ -9,24 +9,55 @@ namespace SalaryCalculator {
         export const getMonthlySalaryNet = (salaryGross: number): number => salaryGross * 0.83;
     }
 
-    export const getAnnualSalaryGross = (salaryGross: number): number =>
-        salaryGross * 13;
+    /**
+     * Obtener sueldo bruto anual, incluyendo el aguinaldo
+     * @param monthlySalaryGross - Sueldo bruto mensual
+     * @returns Sueldo bruto anual
+     */
+    export const getAnnualSalaryGross = (monthlySalaryGross: number): number =>
+        monthlySalaryGross * 13;
 
-    export const getMonthlySalaryGross = (salaryGross: number): number =>
-        SalaryCalculator.getAnnualSalaryGross(salaryGross) / 12;
+    /**
+     * Obtener sueldo bruto mensual promedio, incluyendo el aguinaldo
+     * @param monthlySalaryGross - Sueldo bruto mensual
+     * @returns Sueldo bruto mensual, incluyendo el aguinaldo
+     */
+    export const getMonthlySalaryGross = (monthlySalaryGross: number): number =>
+        SalaryCalculator.getAnnualSalaryGross(monthlySalaryGross) / 12;
 
-    export const getMonthlySalaryNet = (salaryGross: number, monthlyTax: number): number =>
-        Formula.getMonthlySalaryNet(salaryGross) - monthlyTax;
+    /**
+     * Obtener sueldo neto mensual
+     * @param monthlySalaryGross - Sueldo bruto mensual
+     * @param monthlyTax - Impuesto mensual
+     * @returns Sueldo neto mensual restando aportes e impuesto a las ganancias
+     */
+    export const getMonthlySalaryNet = (monthlySalaryGross: number, monthlyTax: number): number =>
+        Formula.getMonthlySalaryNet(monthlySalaryGross) - monthlyTax;
 
+    /**
+     * Obtener sueldo bruto anual con las deducciones aplicadas
+     * @param userInput - Input del usuario
+     * @param config - Configuración del impuesto
+     * @returns Sueldo bruto anual con las deducciones aplicadas
+     */
     export const getAnnualSalaryGrossWithDeductions = (userInput: TaxUserInput, config: TaxConfig): number =>
         SalaryCalculator.getAnnualSalaryGross(userInput.salary) - DeductionCalculator.getTotal(userInput, config);
 
-    export const getSummary = (userInput: TaxUserInput, tax: number): SalarySummary => ({
-        net: SalaryCalculator.getMonthlySalaryNet(userInput.salary, tax),
-        gross: userInput.salary
+    /**
+     * @param monthlySalaryGross - Salario bruto mensual
+     * @param monthlyTax - Impuesto a las ganancias mensual
+     * @returns Salario bruto y neto
+     */
+    export const getSummary = (monthlySalaryGross: number, monthlyTax: number): SalarySummary => ({
+        net: SalaryCalculator.getMonthlySalaryNet(monthlySalaryGross, monthlyTax),
+        gross: monthlySalaryGross
     });
 
-    export const getDefaultSummary = (userInput: TaxUserInput): SalarySummary => SalaryCalculator.getSummary(userInput, 0);
+    /**
+     * @param monthlySalaryGross - Salario bruto mensual
+     * @returns Salario bruto y neto
+     */
+    export const getDefaultSummary = (monthlySalaryGross: number): SalarySummary => SalaryCalculator.getSummary(monthlySalaryGross, 0);
 
 }
 

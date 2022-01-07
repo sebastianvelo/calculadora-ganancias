@@ -10,7 +10,7 @@ namespace Calculator {
     export const getIncomeTaxSummary = (userInput: TaxUserInput, config: TaxConfig): Summary => {
         const annualSalary = SalaryCalculator.getAnnualSalaryGrossWithDeductions(userInput, config);
         const tax = TaxCalculator.getSummary(annualSalary, config);
-        const salary = SalaryCalculator.getSummary(userInput, tax.month);
+        const salary = SalaryCalculator.getSummary(userInput.salary, tax.month);
         const aports = AportsCalculator.getSummary(userInput.salary);
         return {
             salary,
@@ -20,7 +20,7 @@ namespace Calculator {
     };
 
     export const getDefaultSummary = (userInput: TaxUserInput): Summary => ({
-        salary: SalaryCalculator.getDefaultSummary(userInput),
+        salary: SalaryCalculator.getDefaultSummary(userInput.salary),
         tax: TaxCalculator.getDefaultSummary(),
         aports: AportsCalculator.getSummary(userInput.salary),
     });
