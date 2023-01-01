@@ -27,7 +27,7 @@ const rangeLabel = {
 
 const TaxFormBody: FunctionComponent<TaxFormBodyProps> = (props: TaxFormBodyProps) => (
     <div className="flex flex-col w-full h-full px-1 md:px-4 py-2 space-y-2 ">
-        <div className="w-full space-y-2">
+        <div className="w-full flex flex-col space-y-2 xl:flex-row xl:space-x-2 xl:space-y-0">
             <Section title="Ingresos">
                 <Input symb="$" type="number" label="Salario bruto" onChange={(e) => props.setters.setSalary(+e.target.value)} min={0} />
             </Section>

@@ -29,8 +29,16 @@ const Main: FunctionComponent = () => {
 
     const calculate = () => setSummary(Calculator.getSummary(getUserInput(), taxConfig))
 
+    /* const demo = (start: number, it: number, size: number) => Array(size).fill("").map((_, i) => {
+        const s = ((i + 1) * it) + start;
+        const summ = Calculator.getSummary({ salary: s }, taxConfig);
+        return [summ.salary.gross, summ.salary.net];
+    });
+    // console.log(demo(100_000, 10_000, 100));
+ */
+
     return (
-        <main className="flex xl:flex-row flex-col w-full bg-gradient-to-tr from-white to-blue-100">
+        <main className="flex flex-col w-full bg-gradient-to-tr from-white to-blue-100 min-h-screen">
             <TaxForm userInput={getUserInput()} setters={setters} calculate={calculate} />
             <SummarySection summary={getSummaryModel(summary)} />
         </main>

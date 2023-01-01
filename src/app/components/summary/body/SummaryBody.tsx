@@ -10,7 +10,7 @@ export interface SummaryBodyProps {
 const SummaryBody: FunctionComponent<SummaryBodyProps> = (props: SummaryBodyProps) => (
     <div className="space-y-2 flex flex-col w-full h-full lg:px-4 py-2 px-1">
         {props.summary &&
-            <>
+            <div className="grid gap-4 lg:grid-cols-3">
                 <Section title="Salario">
                     <SummaryRow title="Sueldo bruto" value={{ label: props.summary.salary.gross, className: "text-green-200" }} />
                     <SummaryRow title="Sueldo en mano" value={{ label: props.summary.salary.net, className: "text-green-300" }} />
@@ -25,7 +25,7 @@ const SummaryBody: FunctionComponent<SummaryBodyProps> = (props: SummaryBodyProp
                     <SummaryRow title="Ley 19032 (PAMI)" value={{ label: props.summary.aports.pami, className: "text-red-300" }} />
                     <SummaryRow title="Total" value={{ label: props.summary.aports.total, className: "text-red-500" }} />
                 </Section>
-            </>
+            </div>
         }
         <p className="text-black text-right font-bold">Este resultado es una aproximación.</p>
     </div>
